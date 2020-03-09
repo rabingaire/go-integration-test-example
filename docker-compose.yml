@@ -1,0 +1,21 @@
+version: "3"
+networks:
+  queue-test:
+    driver: bridge
+services:
+  tests:
+    container_name: "tests"
+    build:
+      context: .
+    depends_on:
+      - rabbitmq
+    networks:
+      - queue-test
+  rabbitmq:
+    container_name: "rabbitmq"
+    image: "rabbitmq:3.6-management-alpine"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - queue-test
