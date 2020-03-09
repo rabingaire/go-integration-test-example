@@ -2,7 +2,7 @@ package rabbitmq
 
 import "github.com/streadway/amqp"
 
-// Config parameters for queue service
+// Config parameters for rabbitmq
 type Config struct {
 	URL        string
 	Exchange   string
@@ -11,14 +11,14 @@ type Config struct {
 	BindingKey string
 }
 
-// Rabbitmq implements the Queue interface
+// Rabbitmq struct holds conn, channel and config
 type Rabbitmq struct {
 	conn    *amqp.Connection
 	channel *amqp.Channel
 	config  Config
 }
 
-// New instance of Queue
+// New instance of rabbitmq
 func New(config Config) (*Rabbitmq, error) {
 	conn, err := amqp.Dial(config.URL)
 	if err != nil {
